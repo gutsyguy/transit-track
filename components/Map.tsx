@@ -1,7 +1,6 @@
 import MapView, { Marker } from "react-native-maps";
+import { LatLong } from "../lib/latlong";
 import { styles } from "../App";
-
-export type LatLong = [number, number];
 
 interface MapSectionProps {
   bus_positions: LatLong[];
