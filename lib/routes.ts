@@ -1,7 +1,7 @@
 import { LatLong } from "./latlong";
 
 const port = "https://transit-track-backend.onrender.com";
-// const localport = "https://localhost:8080"
+// const port = "https://localhost:8080"
 
 interface Signup {
   email: string;
@@ -14,7 +14,7 @@ interface Signup {
 interface LogIn {
   email: string;
   password: string;
-  transit: TransitUnit
+  transit: string
 }
 
 export const SignUp = async (req: Signup) => {
@@ -110,5 +110,17 @@ export interface TransitStop {
 
 export async function getTransitData(): Promise<TransitData> {
   let fetchRes = await fetch(port + "/api/get_transit_data");
+  return await fetchRes.json();
+}
+
+export interface Transits {
+  transits: {
+    location: LatLong;
+    transit: TransitUnit;
+  }[];
+}
+
+export async function getTransits(): Promise<Transits> {
+  let fetchRes = await fetch(port + "/api/get_transits");
   return await fetchRes.json();
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -6,46 +6,21 @@ import {
   Button,
   View,
 } from "react-native";
-import { LogIn, SignUp, TransitUnit } from "../lib/routes";
+import { LogIn, SignUp, TransitData, TransitUnit } from "../lib/routes";
 import { SettingsPage } from "./settings";
 import SelectDropdown from "react-native-select-dropdown";
+import { TokenContext } from "../components/Navbar";
 
 const Login = ({
+  transitData,
   setSettingsPage,
 }: {
+  transitData: TransitData;
   setSettingsPage: (next: SettingsPage) => void;
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busTransit, setBusTransit] = useState("");
-
-  const transitNumbers: any[] = ["51A", "51B", "51C"];
-  const transitList: TransitUnit[] = [
-    {
-      id: "1",
-      short_name: "51A",
-      long_name: "Fruitvale",
-      color: "red",
-      text_color: "string",
-      stop_ids: ["e", "e"],
-    },
-    {
-      id: "2",
-      short_name: "51B",
-      long_name: "Fruitvole",
-      color: "redd",
-      text_color: "stringg",
-      stop_ids: ["e", "e", "e"],
-    },
-    {
-      id: "3",
-      short_name: "51C",
-      long_name: "Fruitvule",
-      color: "reddd",
-      text_color: "stringgg",
-      stop_ids: ["e", "e", "e", "e"],
-    },
-  ];
 
   return (
     <SafeAreaView>
@@ -64,7 +39,7 @@ const Login = ({
       />
       <View>
         <SelectDropdown
-          data={transitNumbers}
+          data={transitData.units.map((unit) => unit.short_name)}
           onSelect={(selectedItem, index) => {
             setBusTransit(selectedItem);
           }}
@@ -85,11 +60,13 @@ const Login = ({
             const login = await LogIn({
               email,
               password,
-              transit: transitList.find((it) =>{
-                return it.short_name === busTransit
-              }),
+              transit: JSON.stringify(
+                transitData.units.find((it) => it.short_name == busTransit),
+              ),
             });
             setSettingsPage("Settings");
+            // let { setToken } = useContext(TokenContext);
+            // setToken(login.token);
             console.log(login);
           } catch (error) {
             console.error(error);
