@@ -33,6 +33,7 @@ const SignUp = ({
           style={styles.input}
           onChangeText={setPassword}
           value={password}
+          secureTextEntry={true}
           placeholder="password"
         />
         <TextInput
