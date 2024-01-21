@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
 import MapSection from "../components/Map";
 import { getCurrentLocation, requestLocationPermissions } from "../lib/perms";
 import { LatLong } from "../lib/latlong";
@@ -50,6 +50,7 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
           }}
           defaultButtonText="Select Transit"
         />
+        <Button title="Reset" onPress={() => setBusTransit("")} />
       </View>
       <MapSection
         selectedTransit={
