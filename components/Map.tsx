@@ -1,6 +1,7 @@
 import MapView, { Marker } from "react-native-maps";
 import { LatLong } from "../lib/latlong";
 import { TransitData, TransitUnit } from "../lib/routes";
+import { View } from "react-native";
 
 interface MapSectionProps {
   selectedTransit: TransitUnit | null;
@@ -21,9 +22,9 @@ export default function MapSection({
 
   let stops = transitData
     ? transitData.stops.map((stop) => {
-        let shouldRender =
-          transitData && selectedTransit.stop_ids.includes(stop.stop_id);
-        return shouldRender ? (
+        return (selectedTransit &&
+          selectedTransit.stop_ids.includes(stop.stop_id)) ||
+          !selectedTransit ? (
           <Marker
             coordinate={{
               latitude: stop.lat,
@@ -32,10 +33,10 @@ export default function MapSection({
             key={stop.stop_id}
             focusable={true}
             description={stop.name}
-            pinColor="#FFFFFF"
+            pinColor={"orange"}
           />
         ) : (
-          <></>
+          <View key={stop.stop_id}></View>
         );
       })
     : [];
