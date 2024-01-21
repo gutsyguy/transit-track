@@ -1,6 +1,5 @@
 import MapView, { Marker } from "react-native-maps";
 import { LatLong } from "../lib/latlong";
-import { styles } from "../App";
 
 interface MapSectionProps {
   bus_positions: LatLong[];
@@ -19,7 +18,6 @@ export default function MapSection({
 
   return (
     <MapView
-      style={styles.map}
       region={{
         latitude: camera_position[0],
         longitude: camera_position[1],
