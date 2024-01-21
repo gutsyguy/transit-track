@@ -7,6 +7,7 @@ import { TransitData, TransitUnit } from "../lib/routes";
 import SearchableDropdown from "react-native-searchable-dropdown";
 import { idText } from "typescript";
 import SelectDropdown from "react-native-select-dropdown";
+import BusBlockInfo from "../components/BusBlockInfo";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -16,7 +17,8 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
     36.9972128776262, -122.05174272604341,
   ] as LatLong);
 
-  const [selectedTranitUnit, setSelectedTransitUnit] = useState("");
+  const [selectedTransitUnit, setSelectedTransitUnit] =
+    useState<TransitUnit | null>(null);
   const [busTransit, setBusTransit] = useState("");
 
   useEffect(() => {
@@ -44,6 +46,7 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
             }
             onSelect={(selectedItem, index) => {
               setBusTransit(selectedItem);
+              setSelectedTransitUnit(transitData.units[index]);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem;
@@ -54,12 +57,13 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
             defaultButtonText="Select Transit"
           />
         </View>
-        <MapSection
+        {/* <MapSection
           transitData={transitData}
           bus_positions={[]}
           camera_position={cameraPosition}
           camera_size={[0.0001, 0.0001]}
-        />
+        /> */}
+        <BusBlockInfo transitUnit={selectedTransitUnit} />
       </View>
     </View>
   );
