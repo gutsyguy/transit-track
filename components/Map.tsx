@@ -23,19 +23,20 @@ export default function MapSection({
 }: MapSectionProps) {
   const [busPositions, setBusPositions] = useState([]);
   useEffect(() => {
-    (async () => {
+    setTimeout(async () => {
       if (selectedTransit) {
-        let res = await getAdminLocationWithTransit({
+        let resA = (await getAdminLocationWithTransit({
           transit: selectedTransit,
-        });
+        })) as any as string;
+        let res = JSON.parse(resA);
         setBusPositions(res.locations);
       } else {
         setBusPositions([]);
       }
-    })();
-  }, []);
+    }, 2000);
+  }, [selectedTransit, busPositions]);
   const markers = busPositions.map((point) => {
-    return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
+    return <Marker title="transit" pinColor="yellow" coordinate={{ latitude: point[0], longitude: point[1] }} />;
   });
 
   let stops = transitData
