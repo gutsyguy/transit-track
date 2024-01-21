@@ -14,6 +14,7 @@ interface Signup {
 interface LogIn {
   email: string;
   password: string;
+  transit: TransitUnit
 }
 
 export const SignUp = async (req: Signup) => {
@@ -84,6 +85,7 @@ export const calculateDensity = async (req: CalculateDensity) => {
   return JSON.parse(JSON.stringify(resText));
 };
 
+
 export interface TransitData {
   stops: TransitStop[];
   units: TransitUnit[];
@@ -95,7 +97,6 @@ export interface TransitUnit {
   long_name: string;
   color: string;
   text_color: string;
-
   stop_ids: string[];
 }
 
