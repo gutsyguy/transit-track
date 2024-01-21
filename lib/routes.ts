@@ -84,12 +84,12 @@ export const calculateDensity = async (req: CalculateDensity) => {
   return JSON.parse(JSON.stringify(resText));
 };
 
-interface TransitData {
+export interface TransitData {
   stops: TransitStop[];
   units: TransitUnit[];
 }
 
-interface TransitUnit {
+export interface TransitUnit {
   id: string;
   short_name: string;
   long_name: string;
@@ -99,7 +99,7 @@ interface TransitUnit {
   stop_ids: string[];
 }
 
-interface TransitStop {
+export interface TransitStop {
   stop_id: string;
   name: string;
   code: number;
