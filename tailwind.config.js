@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./App.{js,jsx,ts,tsx}", "./transit-track/**/*.{js,jsx,ts,tsx}"],
+  content: ["./components/**/*.{ts,tsx}", "./App/{ts, tsx", "./Index/{ts, tsx"],
   theme: {
     extend: {},
   },
