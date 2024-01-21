@@ -25,7 +25,7 @@ const Navbar = () => {
     <TokenContext.Provider value={{ token: token, setToken: setToken }}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Maps" component={Home} />
+          <Tab.Screen name="Maps" component={() => <Home transitData={transitData}/>} />
           <Tab.Screen name="Profile" component={Profile} />
           <Tab.Screen
             name="Settings"

@@ -3,40 +3,13 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import MapSection from "../components/Map";
 import { getCurrentLocation, requestLocationPermissions } from "../lib/perms";
 import { LatLong } from "../lib/latlong";
-import { TransitUnit } from "../lib/routes";
-import SelectDropdown from 'react-native-select-dropdown'
+import { TransitData, TransitUnit } from "../lib/routes";
+import SelectDropdown from "react-native-select-dropdown";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const transitList: TransitUnit[] = [
-  {
-    id: "1",
-    short_name: "51A",
-    long_name: "Fruitvale",
-    color: "red",
-    text_color: "string",
-    stop_ids: ["e", "e"],
-  },
-  {
-    id: "2",
-    short_name: "51B",
-    long_name: "Fruitvole",
-    color: "redd",
-    text_color: "stringg",
-    stop_ids: ["e", "e", "e"],
-  },
-  {
-    id: "3",
-    short_name: "51C",
-    long_name: "Fruitvule",
-    color: "reddd",
-    text_color: "stringgg",
-    stop_ids: ["e", "e", "e", "e"],
-  },
-];
-
-const Home = () => {
+const Home = ({ transitData }: { transitData: TransitData }) => {
   const [cameraPosition, setCameraPosition] = useState([
     36.9972128776262, -122.05174272604341,
   ] as LatLong);
