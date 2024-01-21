@@ -1,24 +1,15 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { TailwindProvider } from "tailwind-rn";
+import utilities from "./tailwind.json"; 
+import Index from "./Index";
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    // @ts-ignore - Temporarily ignore the TypeScript error
+    <TailwindProvider utilities={utilities}>
+      <Index />
+    </TailwindProvider>
   );
-}
+};
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-});
+export default App;
