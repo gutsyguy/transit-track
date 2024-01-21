@@ -1,41 +1,21 @@
-import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { NavigationContainer, TabActions } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/home";
+import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-function SettingsScreen() {
+const SettingsScreen = ({navigation}) => {
   return (
-    <View style={styles.navbarItem}>
+    <View style={styles.container}>
       <Text>Settings!</Text>
+      <Button title="Sign Up" onPress={() => navigation.navigate("Details")} />
+      <Button title="Log In" onPress={() => navigation.navigate("Details")} />
     </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-const Navbar = () => {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Maps" component={Home} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  navbarItem: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   mapContainer: {
     backgroundColor: "#61dafb",
@@ -65,4 +45,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Navbar;
+export default SettingsScreen;

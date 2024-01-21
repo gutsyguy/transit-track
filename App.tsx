@@ -7,10 +7,10 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <>
+    <View>
       <Navbar />
-    </>
+    </View>
   );
-};
+}
 
 export default App;
