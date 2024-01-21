@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
 import Login from "./login";
 import SignUpTextInput from "../components/TextInput";
 import SignUp from "./signup";
+import { TransitData } from "../lib/routes";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export type SettingsPage = "Settings" | "Login" | "Signup";
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = ({ transitData }: { transitData: TransitData }) => {
   let [settingsPage, setSettingsPage] = useState("Settings");
 
   let render = <></>;
@@ -24,7 +25,9 @@ const SettingsScreen = ({ navigation }) => {
       );
       break;
     case "Login":
-      render = <Login setSettingsPage={setSettingsPage} />;
+      render = (
+        <Login setSettingsPage={setSettingsPage} transitData={transitData} />
+      );
       break;
     case "Signup":
       render = <SignUp setSettingsPage={setSettingsPage} />;

@@ -1,7 +1,7 @@
 import { LatLong } from "./latlong";
 
 const port = "https://transit-track-backend.onrender.com";
-// const localport = "https://localhost:8080"
+// const port = "https://localhost:8080"
 
 interface Signup {
   email: string;
@@ -14,7 +14,7 @@ interface Signup {
 interface LogIn {
   email: string;
   password: string;
-  transit: TransitUnit
+  transit: string
 }
 
 export const SignUp = async (req: Signup) => {

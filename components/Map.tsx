@@ -4,12 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import { TransitData, getTransitData } from "../lib/routes";
 
 interface MapSectionProps {
+  transitData: TransitData;
   bus_positions: LatLong[];
   camera_position: LatLong;
   camera_size: LatLong;
 }
 
 export default function MapSection({
+  transitData,
   bus_positions,
   camera_position,
   camera_size,
@@ -18,10 +20,6 @@ export default function MapSection({
     return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
   });
 
-  const [transitData, setTransitData] = useState(null as TransitData | null);
-  useMemo(async () => {
-    setTransitData(await getTransitData());
-  }, []);
   let stops = transitData
     ? transitData.stops.map((stop) => {
         return (

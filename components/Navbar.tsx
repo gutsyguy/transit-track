@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Settings } from "react-native";
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/home";
 import SettingsScreen from "../screens/settings";
 import Profile from "./Profile";
+import { TransitData, getTransitData } from "../lib/routes";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -15,6 +16,10 @@ export const TokenContext = React.createContext(null);
 
 const Navbar = () => {
   const [token, setToken] = useState(null as string | null);
+  const [transitData, setTransitData] = useState(null as TransitData | null);
+  useMemo(async () => {
+    setTransitData(await getTransitData());
+  }, []);
 
   return (
     <TokenContext.Provider value={{ token: token, setToken: setToken }}>
@@ -22,7 +27,10 @@ const Navbar = () => {
         <Tab.Navigator>
           <Tab.Screen name="Maps" component={Home} />
           <Tab.Screen name="Profile" component={Profile} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
+          <Tab.Screen
+            name="Settings"
+            component={() => <SettingsScreen transitData={transitData} />}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </TokenContext.Provider>
