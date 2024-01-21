@@ -51,6 +51,15 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
           defaultButtonText="Select Transit"
         />
         <Button title="Reset" onPress={() => setBusTransit("")} />
+      <BusBlockInfo
+        transitUnit={
+          busTransit
+            ? transitData.units.find(
+                (it) => `${it.short_name} ${it.long_name}` == busTransit,
+              )
+            : null
+        }
+      />
       </View>
       <MapSection
         selectedTransit={
