@@ -1,7 +1,12 @@
 import MapView, { Marker } from "react-native-maps";
 import { LatLong } from "../lib/latlong";
-import { TransitData, TransitUnit } from "../lib/routes";
+import {
+  TransitData,
+  TransitUnit,
+  getAdminLocationWithTransit,
+} from "../lib/routes";
 import { View } from "react-native";
+import { useEffect, useState } from "react";
 
 interface MapSectionProps {
   selectedTransit: TransitUnit | null;
@@ -16,9 +21,22 @@ export default function MapSection({
   camera_size,
   selectedTransit,
 }: MapSectionProps) {
-  // const markers = bus_positions.map((point) => {
-  //   return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
-  // });
+  const [busPositions, setBusPositions] = useState([]);
+  useEffect(() => {
+    (async () => {
+      if (selectedTransit) {
+        let res = await getAdminLocationWithTransit({
+          transit: selectedTransit,
+        });
+        setBusPositions(res.locations);
+      } else {
+        setBusPositions([]);
+      }
+    })();
+  }, []);
+  const markers = busPositions.map((point) => {
+    return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
+  });
 
   let stops = transitData
     ? transitData.stops.map((stop) => {
@@ -62,7 +80,7 @@ export default function MapSection({
           longitude: camera_position[1],
         }}
       />
-      {/*markers*/}
+      {markers}
       {stops}
     </MapView>
   );

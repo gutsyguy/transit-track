@@ -3,14 +3,17 @@ import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
 import MapSection from "../components/Map";
 import { getCurrentLocation, requestLocationPermissions } from "../lib/perms";
 import { LatLong } from "../lib/latlong";
-import { TransitData, TransitUnit } from "../lib/routes";
+import { TransitData, TransitUnit, updateLocation } from "../lib/routes";
 import SelectDropdown from "react-native-select-dropdown";
 import BusBlockInfo from "../components/BusBlockInfo";
+import { useToken } from "../components/Navbar";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const Home = ({ transitData }: { transitData: TransitData }) => {
+  const { token } = useToken();
+
   const [cameraPosition, setCameraPosition] = useState([
     36.9972128776262, -122.05174272604341,
   ] as LatLong);
@@ -23,7 +26,14 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
         setCameraPosition(location);
       });
       setInterval(async () => {
-        await getCurrentLocation((location) => setCameraPosition(location));
+        await getCurrentLocation(async (location) => {
+          setCameraPosition(location);
+          await updateLocation({
+            isAdmin: token ? true : false,
+            token,
+            location,
+          });
+        });
       }, 3000);
     })();
   }, []);
@@ -51,15 +61,15 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
           defaultButtonText="Select Transit"
         />
         <Button title="Reset" onPress={() => setBusTransit("")} />
-      <BusBlockInfo
-        transitUnit={
-          busTransit
-            ? transitData.units.find(
-                (it) => `${it.short_name} ${it.long_name}` == busTransit,
-              )
-            : null
-        }
-      />
+        <BusBlockInfo
+          transitUnit={
+            busTransit
+              ? transitData.units.find(
+                  (it) => `${it.short_name} ${it.long_name}` == busTransit,
+                )
+              : null
+          }
+        />
       </View>
       <MapSection
         selectedTransit={
