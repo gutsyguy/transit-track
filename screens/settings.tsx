@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const SettingsScreen = ({navigation}) => {
+const SettingsScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>Settings!</Text>
-      <Button title="Sign Up" onPress={() => navigation.navigate("Details")} />
-      <Button title="Log In" onPress={() => navigation.navigate("Details")} />
+      <Button title="Sign Up" onPress={() => navigation.navigate("SignUp")} />
+      <Button title="Log In" onPress={() => navigation.navigate("Login")} />
     </View>
   );
 };
