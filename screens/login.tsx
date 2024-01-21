@@ -9,13 +9,14 @@ import {
 import { LogIn, SignUp, TransitData, TransitUnit } from "../lib/routes";
 import { SettingsPage } from "./settings";
 import SelectDropdown from "react-native-select-dropdown";
-import { TokenContext } from "../components/Navbar";
 
 const Login = ({
   transitData,
   setSettingsPage,
+  setToken,
 }: {
   transitData: TransitData;
+  setToken: (token: string) => void;
   setSettingsPage: (next: SettingsPage) => void;
 }) => {
   const [email, setEmail] = useState("");
@@ -65,8 +66,7 @@ const Login = ({
               ),
             });
             setSettingsPage("Settings");
-            // let { setToken } = useContext(TokenContext);
-            // setToken(login.token);
+            setToken(login.token);
             console.log(login);
           } catch (error) {
             console.error(error);

@@ -1,28 +1,29 @@
 import MapView, { Marker } from "react-native-maps";
 import { LatLong } from "../lib/latlong";
-import { useEffect, useMemo, useState } from "react";
-import { TransitData, getTransitData } from "../lib/routes";
+import { TransitData, TransitUnit } from "../lib/routes";
 
 interface MapSectionProps {
+  selectedTransit: TransitUnit | null;
   transitData: TransitData;
-  bus_positions: LatLong[];
   camera_position: LatLong;
   camera_size: LatLong;
 }
 
 export default function MapSection({
   transitData,
-  bus_positions,
   camera_position,
   camera_size,
+  selectedTransit,
 }: MapSectionProps) {
-  const markers = bus_positions.map((point) => {
-    return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
-  });
+  // const markers = bus_positions.map((point) => {
+  //   return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
+  // });
 
   let stops = transitData
     ? transitData.stops.map((stop) => {
-        return (
+        let shouldRender =
+          transitData && selectedTransit.stop_ids.includes(stop.stop_id);
+        return shouldRender ? (
           <Marker
             coordinate={{
               latitude: stop.lat,
@@ -33,6 +34,8 @@ export default function MapSection({
             description={stop.name}
             pinColor="#FFFFFF"
           />
+        ) : (
+          <></>
         );
       })
     : [];
@@ -58,7 +61,7 @@ export default function MapSection({
           longitude: camera_position[1],
         }}
       />
-      {markers}
+      {/*markers*/}
       {stops}
     </MapView>
   );

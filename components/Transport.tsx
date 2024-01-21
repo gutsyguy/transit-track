@@ -12,10 +12,10 @@ const Transport = () => {
     return (
      <View style={styles.container}>
         <View style={styles.container}>
-            <Text style={styles.hero}>Bus No.</Text>
-            <Text style={styles.section}>Time of Arrival</Text>
-            <Text style={styles.section}>Arriving Stop</Text>
-            <Text style={styles.section}>Next Stop</Text>
+        <Text style={[styles.section, styles.gridObj]}>Bus No.</Text>
+        <Text style={[styles.section, styles.gridObj]}>Time of Arrival</Text>
+        <Text style={[styles.section, styles.gridObj]}>Arriving Stop</Text>
+        <Text style={[styles.section, styles.gridObj]}>Next Stop</Text>
         </View>
      </View>
         );
@@ -26,24 +26,37 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         margin: 4,
-        padding: 5,
-    },
-      
+        padding: 4,
+        backgroundColor: 'gray',
+    },   
     lib: {
         marginBottom: 4,
         padding: 4,
-    },
-      
+    },  
     section: {
          marginBottom: 4,
          padding: 4,
-
+         borderRadius: 5,
+         fontSize: 8,
     },
     hero: {
         marginBottom: 4,
         padding: 4,
         fontWeight: 'bold',    
-    }
+    },
+    
+    rectItem: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomWidth: 1.5, 
+        borderBottomColor: 'black', 
+        paddingVertical: 4,
+      },
+      gridObj: {
+        borderRightWidth: 1.5, 
+        borderRightColor: 'black', 
+      },
+
 });
       
 export default Transport

@@ -10,7 +10,15 @@ const windowHeight = Dimensions.get("window").height;
 
 export type SettingsPage = "Settings" | "Login" | "Signup";
 
-const SettingsScreen = ({ transitData }: { transitData: TransitData }) => {
+const SettingsScreen = ({
+  transitData,
+  token,
+  setToken,
+}: {
+  transitData: TransitData;
+  token: string;
+  setToken: (token: string) => void;
+}) => {
   let [settingsPage, setSettingsPage] = useState("Settings");
 
   let render = <></>;
@@ -26,7 +34,11 @@ const SettingsScreen = ({ transitData }: { transitData: TransitData }) => {
       break;
     case "Login":
       render = (
-        <Login setSettingsPage={setSettingsPage} transitData={transitData} />
+        <Login
+          setSettingsPage={setSettingsPage}
+          transitData={transitData}
+          setToken={setToken}
+        />
       );
       break;
     case "Signup":

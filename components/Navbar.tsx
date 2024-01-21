@@ -12,8 +12,6 @@ const windowHeight = Dimensions.get("window").height;
 
 const Tab = createBottomTabNavigator();
 
-export const TokenContext = React.createContext(null);
-
 const Navbar = () => {
   const [token, setToken] = useState(null as string | null);
   const [transitData, setTransitData] = useState(null as TransitData | null);
@@ -22,18 +20,21 @@ const Navbar = () => {
   }, []);
 
   return (
-    <TokenContext.Provider value={{ token: token, setToken: setToken }}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Maps" component={() => <Home transitData={transitData}/>} />
-          <Tab.Screen name="Profile" component={Profile} />
-          <Tab.Screen
-            name="Settings"
-            component={() => <SettingsScreen transitData={transitData} />}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </TokenContext.Provider>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Maps"
+          component={() => <Home transitData={transitData} />}
+        />
+        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen
+          name="Settings"
+          component={() => (
+            <SettingsScreen transitData={transitData} token={token} setToken={setToken} />
+          )}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 

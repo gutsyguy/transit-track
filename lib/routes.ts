@@ -14,7 +14,7 @@ interface Signup {
 interface LogIn {
   email: string;
   password: string;
-  transit: string
+  transit: string;
 }
 
 export const SignUp = async (req: Signup) => {
@@ -85,7 +85,6 @@ export const calculateDensity = async (req: CalculateDensity) => {
   return JSON.parse(JSON.stringify(resText));
 };
 
-
 export interface TransitData {
   stops: TransitStop[];
   units: TransitUnit[];
@@ -123,4 +122,26 @@ export interface Transits {
 export async function getTransits(): Promise<Transits> {
   let fetchRes = await fetch(port + "/api/get_transits");
   return await fetchRes.json();
+}
+
+interface GetProfile {
+  token: string;
+}
+
+export async function getProfile(req: GetProfile): Promise<{
+  email: string;
+  name: string;
+  transitCompany: string;
+}> {
+  let fetchRes = await fetch(port + "/api/get_profile", {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  });
+  let resText = await fetchRes.text();
+
+  return JSON.parse(JSON.stringify(resText));
 }
