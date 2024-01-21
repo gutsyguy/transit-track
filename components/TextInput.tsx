@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SafeAreaView, StyleSheet, TextInput, Button } from "react-native";
-import {Sign} from "../lib/routes";
+import { SignUp } from "../lib/routes";
 
 const SignUpTextInput = () => {
   const [email, setEmail] = useState("");
@@ -45,8 +45,13 @@ const SignUpTextInput = () => {
         title="Sign Up"
         onPress={async () => {
           try {
-            await Sign({ email, name, password, vehicleType, transitCompany});
-            console.log("succulent");
+            await SignUp({
+              email,
+              name,
+              password,
+              vehicleType,
+              transitCompany,
+            });
           } catch (error) {
             console.error(error);
           }
