@@ -12,8 +12,15 @@ export const requestLocationPermissions = async (
   if (foregroundStatus === "granted") {
     console.log("foreground granted");
     let position = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.BestForNavigation,
+      accuracy: Location.Accuracy.High,
     });
     callback([position.coords.latitude, position.coords.longitude]);
   }
 };
+
+export async function getCurrentLocation(callback: PermissionCallback) {
+  let position = await Location.getCurrentPositionAsync({
+    accuracy: Location.Accuracy.BestForNavigation,
+  });
+  callback([position.coords.latitude, position.coords.longitude]);
+}

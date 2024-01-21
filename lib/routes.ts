@@ -83,3 +83,31 @@ export const calculateDensity = async (req: CalculateDensity) => {
 
   return JSON.parse(JSON.stringify(resText));
 };
+
+interface TransitData {
+  stops: TransitStop[];
+  units: TransitUnit[];
+}
+
+interface TransitUnit {
+  id: string;
+  short_name: string;
+  long_name: string;
+  color: string;
+  text_color: string;
+
+  stop_ids: string[];
+}
+
+interface TransitStop {
+  stop_id: string;
+  name: string;
+  code: number;
+  lat: number;
+  long: number;
+}
+
+export async function getTransitData(): Promise<TransitData> {
+  let fetchRes = await fetch(port + "/api/get_transit_data");
+  return await fetchRes.json();
+}
