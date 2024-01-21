@@ -45,7 +45,7 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
           data={
             transitData
               ? transitData.units.map(
-                  (unit) => `${unit.short_name} ${unit.long_name}`,
+                  (unit) => `${unit.short_name} ${unit.long_name}`
                 )
               : []
           }
@@ -65,7 +65,7 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
           transitUnit={
             busTransit
               ? transitData.units.find(
-                  (it) => `${it.short_name} ${it.long_name}` == busTransit,
+                  (it) => `${it.short_name} ${it.long_name}` == busTransit
                 )
               : null
           }
@@ -75,7 +75,7 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
         selectedTransit={
           busTransit
             ? transitData.units.find(
-                (it) => `${it.short_name} ${it.long_name}` == busTransit,
+                (it) => `${it.short_name} ${it.long_name}` == busTransit
               )
             : null
         }
