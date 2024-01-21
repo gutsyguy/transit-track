@@ -4,8 +4,6 @@ import MapSection from "../components/Map";
 import { getCurrentLocation, requestLocationPermissions } from "../lib/perms";
 import { LatLong } from "../lib/latlong";
 import { TransitData, TransitUnit } from "../lib/routes";
-import SearchableDropdown from "react-native-searchable-dropdown";
-import { idText } from "typescript";
 import SelectDropdown from "react-native-select-dropdown";
 import BusBlockInfo from "../components/BusBlockInfo";
 
@@ -17,8 +15,6 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
     36.9972128776262, -122.05174272604341,
   ] as LatLong);
 
-  const [selectedTransitUnit, setSelectedTransitUnit] =
-    useState<TransitUnit | null>(null);
   const [busTransit, setBusTransit] = useState("");
 
   useEffect(() => {
@@ -33,38 +29,40 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
   }, []);
 
   return (
-    <View
-    // style={styles.container}
-    >
-      <View style={styles.mapContainer}>
-        <View style={styles.searchBar}>
-          <SelectDropdown
-            data={
-              transitData
-                ? transitData.units.map((unit) => unit.short_name)
-                : []
-            }
-            onSelect={(selectedItem, index) => {
-              setBusTransit(selectedItem);
-              setSelectedTransitUnit(transitData.units[index]);
-            }}
-            buttonTextAfterSelection={(selectedItem, index) => {
-              return selectedItem;
-            }}
-            rowTextForSelection={(item, index) => {
-              return item;
-            }}
-            defaultButtonText="Select Transit"
-          />
-        </View>
-        {/* <MapSection
-          transitData={transitData}
-          bus_positions={[]}
-          camera_position={cameraPosition}
-          camera_size={[0.0001, 0.0001]}
-        /> */}
-        <BusBlockInfo transitUnit={selectedTransitUnit} />
+    <View style={styles.mapContainer}>
+      <View style={styles.searchBar}>
+        <SelectDropdown
+          data={
+            transitData
+              ? transitData.units.map(
+                  (unit) => `${unit.short_name} ${unit.long_name}`,
+                )
+              : []
+          }
+          onSelect={(selectedItem, index) => {
+            setBusTransit(selectedItem);
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            return selectedItem;
+          }}
+          rowTextForSelection={(item, index) => {
+            return item;
+          }}
+          defaultButtonText="Select Transit"
+        />
       </View>
+      <MapSection
+        selectedTransit={
+          busTransit
+            ? transitData.units.find(
+                (it) => `${it.short_name} ${it.long_name}` == busTransit,
+              )
+            : null
+        }
+        transitData={transitData}
+        camera_position={cameraPosition}
+        camera_size={[0.0001, 0.0001]}
+      />
     </View>
   );
 };
