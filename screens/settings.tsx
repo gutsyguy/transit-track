@@ -4,33 +4,32 @@ import Login from "./login";
 import SignUpTextInput from "../components/TextInput";
 import SignUp from "./signup";
 import { TransitData } from "../lib/routes";
+import { useToken } from "../components/Navbar";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export type SettingsPage = "Settings" | "Login" | "Signup";
 
-const SettingsScreen = ({
-  transitData,
-  token,
-  setToken,
-}: {
-  transitData: TransitData;
-  token: string;
-  setToken: (token: string) => void;
-}) => {
+const SettingsScreen = ({ transitData }: { transitData: TransitData }) => {
   let [settingsPage, setSettingsPage] = useState("Settings");
+
+  let { token, setToken } = useToken();
+  console.log(token);
 
   let render = <></>;
   switch (settingsPage) {
     case "Settings":
-      render = (
-        <View style={styles.container}>
-          <Text>Settings!</Text>
-          <Button title="Sign Up" onPress={() => setSettingsPage("Signup")} />
-          <Button title="Log In" onPress={() => setSettingsPage("Login")} />
-        </View>
-      );
+      let condRender =
+        token == null ? (
+          <>
+            <Button title="Sign Up" onPress={() => setSettingsPage("Signup")} />
+            <Button title="Log In" onPress={() => setSettingsPage("Login")} />
+          </>
+        ) : (
+          <Text>Logged in</Text>
+        );
+      render = <View style={styles.container}>{condRender}</View>;
       break;
     case "Login":
       render = (
