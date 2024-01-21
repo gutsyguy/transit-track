@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -66,8 +66,8 @@ const Login = ({
               ),
             });
             setSettingsPage("Settings");
-            setToken(login.token);
-            console.log(login);
+            console.log("setting", login.token, JSON.parse(login));
+            setToken(JSON.parse(login).token);
           } catch (error) {
             console.error(error);
           }

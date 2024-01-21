@@ -145,3 +145,25 @@ export async function getProfile(req: GetProfile): Promise<{
 
   return JSON.parse(JSON.stringify(resText));
 }
+
+export interface GetAdminLocationWithTransit {
+  transit: TransitUnit;
+}
+
+export async function getAdminLocationWithTransit(
+  req: GetAdminLocationWithTransit,
+): Promise<{
+  locations: LatLong[];
+}> {
+  let fetchRes = await fetch(port + "/api/get_admin_location_with_transit", {
+    method: "post",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  });
+  let resText = await fetchRes.text();
+
+  return JSON.parse(JSON.stringify(resText));
+}

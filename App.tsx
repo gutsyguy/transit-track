@@ -6,15 +6,17 @@ import Home from "./screens/home";
 import SettingsScreen from "./screens/settings";
 import Login from "./screens/login";
 import SignUp from "./screens/signup";
+import { LogBox } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
-  return (
-    <>
-      <Navbar />
-    </>
-  );
+    LogBox.ignoreAllLogs();
+    return (
+        <>
+            <Navbar />
+        </>
+    );
 }
 
 export default App;
