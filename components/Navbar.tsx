@@ -12,10 +12,12 @@ const Tab = createBottomTabNavigator();
 
 const Navbar = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Maps" component={Home} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Maps" component={Home} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 

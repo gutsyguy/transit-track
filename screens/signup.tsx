@@ -1,9 +1,15 @@
-import { TextInput } from "react-native";
+import { Button, TextInput } from "react-native";
+import { SettingsPage } from "./settings";
 
-const SignUp = () => {
+const SignUp = ({
+  setSettingsPage,
+}: {
+  setSettingsPage: (next: SettingsPage) => void;
+}) => {
   return (
     <>
       <TextInput />
+      <Button title="Go Back" onPress={() => setSettingsPage("Settings")} />
     </>
   );
 };

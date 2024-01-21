@@ -1,16 +1,37 @@
+import { useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Button } from "react-native";
+import Login from "./login";
+import SignUpTextInput from "../components/TextInput";
+import SignUp from "./signup";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
+export type SettingsPage = "Settings" | "Login" | "Signup";
+
 const SettingsScreen = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <Text>Settings!</Text>
-      <Button title="Sign Up" onPress={() => navigation.navigate("SignUp")} />
-      <Button title="Log In" onPress={() => navigation.navigate("Login")} />
-    </View>
-  );
+  let [settingsPage, setSettingsPage] = useState("Settings");
+
+  let render = <></>;
+  switch (settingsPage) {
+    case "Settings":
+      render = (
+        <View style={styles.container}>
+          <Text>Settings!</Text>
+          <Button title="Sign Up" onPress={() => setSettingsPage("Signup")} />
+          <Button title="Log In" onPress={() => setSettingsPage("Login")} />
+        </View>
+      );
+      break;
+    case "Login":
+      render = <Login setSettingsPage={setSettingsPage} />;
+      break;
+    case "Signup":
+      render = <SignUp setSettingsPage={setSettingsPage} />;
+      break;
+  }
+
+  return render;
 };
 
 const styles = StyleSheet.create({
