@@ -18,7 +18,7 @@
         "googleMapsApiKey": "AIzaSyCjUSgaObg-TZMjFNWpxNRAxe-djtY9FKM"
       },
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"],
+        "UIBackgroundModes": ["location", "fetch"]
       },
       "bundleIdentifier": "com.anonymous.transittrack"
     },

@@ -1,14 +1,13 @@
-import React from "react";
-import { TailwindProvider } from "tailwind-rn";
-import utilities from "./tailwind.json"; 
+import React from 'react'
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 import Index from "./Index";
 
 const App: React.FC = () => {
   return (
-    // @ts-ignore - Temporarily ignore the TypeScript error
-    <TailwindProvider utilities={utilities}>
-      <Index />
-    </TailwindProvider>
+    <View>
+      {/* <Navbar /> */}
+    </View>
   );
 };
 

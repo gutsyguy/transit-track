@@ -8,25 +8,26 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "build:tailwind": "tailwindcss --input input.css --output tailwind.css --no-autoprefixer && tailwind-rn",
-    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\""
+    "dev:tailwind": "concurrently \"tailwindcss --input input.css --output tailwind.css --no-autoprefixer --watch\" \"tailwind-rn --watch\"",
+    "ts:check": "tsc"
   },
   "dependencies": {
-    "@react-navigation/native": "^6.1.9",
-    "expo": "~50.0.2",
+    "@types/react-native": "^0.70.19",
+    "expo": "^50.0.2",
     "expo-location": "~16.5.2",
     "expo-status-bar": "~1.11.1",
-    "react": "18.2.0",
+    "nativewind": "^2.0.11",
+    "react": "^18.2.0",
     "react-native": "0.73.2",
-    "react-native-maps": "1.8.0",
-    "tailwind-rn": "^4.2.0"
+    "react-native-maps": "1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/react": "~18.2.45",
+    "@types/react": "^18.2.48",
     "concurrently": "^8.2.2",
+    "metro-config": "^0.80.4",
     "postcss": "^8.4.33",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.1.3"
+    "tailwindcss": "^3.4.1"
   },
   "private": true
 }
