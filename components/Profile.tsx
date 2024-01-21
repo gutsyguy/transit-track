@@ -5,8 +5,9 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.section}>Name</Text>
-      <Text style={styles.section}>Item 2</Text>
+      <Text style={styles.section}>Email</Text>
       <Text style={styles.section}>Item 3</Text>
+      <Text style={styles.section}>Item 4</Text>
     </View>
   );
 };

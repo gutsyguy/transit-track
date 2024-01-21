@@ -4,6 +4,7 @@ import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/home";
 import SettingsScreen from "../screens/settings";
+import Profile from "./Profile";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -15,6 +16,7 @@ const Navbar = () => {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Maps" component={Home} />
+        <Tab.Screen name="Profile" component={Profile} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
@@ -34,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#61dafb",
   },
   map: {
-    // Your existing styles for the title
+   
     height: windowHeight * 0.4,
     borderColor: "#20232a",
     borderWidth: 4,
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   searchBar: {
-    // Your existing styles for the title
+   
     height: windowHeight * 0.1,
     borderWidth: 4,
     borderRadius: 6,
