@@ -12,8 +12,10 @@
     "ts:check": "tsc"
   },
   "dependencies": {
-    "@types/react-native": "^0.70.19",
-    "expo": "^50.0.2",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/native-stack": "^6.9.17",
+    "expo": "~50.0.2",
     "expo-location": "~16.5.2",
     "expo-status-bar": "~1.11.1",
     "nativewind": "^2.0.11",

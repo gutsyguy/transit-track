@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from "react-native";
 // import { useTailwind } from "tailwind-rn";
 import { useTailwind } from "tailwind-rn";
 import SignUpTextInput from "./components/TextInput";
+import Home from "./screens/home";
 
 export default function Index() {
   const tailwind = useTailwind();
   return (
     <View style={tailwind("bg-black")}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <SignUpTextInput />
+      {/* <SignUpTextInput /> */}
+      {/* <Home /> */}
       <StatusBar style="auto" />
     </View>
   );

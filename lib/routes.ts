@@ -9,7 +9,12 @@ interface Signup{
     transitCompany: string
 }
 
-export const Sign = async (req:Signup) =>{
+interface LogIn{
+    email: string
+    password: string
+}
+
+export const SignUp = async (req:Signup) =>{
     let fetchRes = await fetch(port + "/api/signup", {
         method: 'post',
         headers:{
@@ -22,3 +27,19 @@ export const Sign = async (req:Signup) =>{
 
     return JSON.parse(JSON.stringify(resText))
 }
+
+export const LogIn = async (req:LogIn) =>{
+    let fetchRes = await fetch(port + "/api/login", {
+        method: 'post',
+        headers:{
+            Accept: "application/json",
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(req)
+    })
+    let resText = await fetchRes.text()
+
+    return JSON.parse(JSON.stringify(resText))
+}
+
+

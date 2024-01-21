@@ -1,49 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { NavigationContainer, TabActions } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/home";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-function HomeScreen() {
+const Home = () => {
   return (
-    <View style={styles.navbarItem}>
-      <Text>Home!</Text>
+    <View
+    // style={styles.container}
+    >
+      <View style={styles.mapContainer}>
+        <Text style={styles.searchBar}>Search Bar</Text>
+        <Text style={styles.map}>Map</Text>
+      </View>
     </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={styles.navbarItem}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-const Navbar = () => {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Maps" component={Home} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  navbarItem: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   mapContainer: {
     backgroundColor: "#61dafb",
@@ -73,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Navbar;
+export default Home;
