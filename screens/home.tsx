@@ -35,23 +35,24 @@ const Home = ({ transitData }: { transitData: TransitData }) => {
     // style={styles.container}
     >
       <View style={styles.mapContainer}>
-        <View>
-
-        <SelectDropdown
-          data={
-            transitData ? transitData.units.map((unit) => unit.short_name) : []
-          }
-          onSelect={(selectedItem, index) => {
-            setBusTransit(selectedItem);
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-          defaultButtonText="Select Transit"
-        />
+        <View style={styles.searchBar}>
+          <SelectDropdown
+            data={
+              transitData
+                ? transitData.units.map((unit) => unit.short_name)
+                : []
+            }
+            onSelect={(selectedItem, index) => {
+              setBusTransit(selectedItem);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+            defaultButtonText="Select Transit"
+          />
         </View>
         <MapSection
           transitData={transitData}
@@ -84,14 +85,12 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     // Your existing styles for the title
-    height: windowHeight * 0.05,
-    borderWidth: 4,
-    borderRadius: 6,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     borderColor: "#20232a",
     backgroundColor: "#FFFFFF",
     color: "#20232a",
-    textAlign: "center",
-    fontSize: 30,
     fontWeight: "bold",
   },
 });
