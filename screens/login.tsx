@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,6 +9,7 @@ import {
 import { LogIn, SignUp, TransitUnit } from "../lib/routes";
 import { SettingsPage } from "./settings";
 import SelectDropdown from "react-native-select-dropdown";
+import { TokenContext } from "../components/Navbar";
 
 const Login = ({
   setSettingsPage,
@@ -90,6 +91,8 @@ const Login = ({
               }),
             });
             setSettingsPage("Settings");
+            let { setToken } = useContext(TokenContext);
+            setToken(login.token);
             console.log(login);
           } catch (error) {
             console.error(error);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Settings } from "react-native";
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -11,15 +11,21 @@ const windowHeight = Dimensions.get("window").height;
 
 const Tab = createBottomTabNavigator();
 
+export const TokenContext = React.createContext(null);
+
 const Navbar = () => {
+  const [token, setToken] = useState(null as string | null);
+
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Maps" component={Home} />
-        <Tab.Screen name="Profile" component={Profile} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <TokenContext.Provider value={{ token: token, setToken: setToken }}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Maps" component={Home} />
+          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </TokenContext.Provider>
   );
 };
 
@@ -36,7 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#61dafb",
   },
   map: {
-   
     height: windowHeight * 0.4,
     borderColor: "#20232a",
     borderWidth: 4,
@@ -47,7 +52,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   searchBar: {
-   
     height: windowHeight * 0.1,
     borderWidth: 4,
     borderRadius: 6,

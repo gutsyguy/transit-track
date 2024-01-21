@@ -112,3 +112,15 @@ export async function getTransitData(): Promise<TransitData> {
   let fetchRes = await fetch(port + "/api/get_transit_data");
   return await fetchRes.json();
 }
+
+export interface Transits {
+  transits: {
+    location: LatLong;
+    transit: TransitUnit;
+  }[];
+}
+
+export async function getTransits(): Promise<Transits> {
+  let fetchRes = await fetch(port + "/api/get_transits");
+  return await fetchRes.json();
+}
