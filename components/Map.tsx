@@ -18,7 +18,11 @@ export default function MapSection({
 
   return (
     <MapView
-      region={{
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+      initialRegion={{
         latitude: camera_position[0],
         longitude: camera_position[1],
         latitudeDelta: camera_size[0],
@@ -26,6 +30,13 @@ export default function MapSection({
       }}
       provider="google"
     >
+      <Marker
+        title="You"
+        coordinate={{
+          latitude: camera_position[0],
+          longitude: camera_position[1],
+        }}
+      />
       {markers}
     </MapView>
   );
