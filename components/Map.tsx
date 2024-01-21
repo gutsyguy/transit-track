@@ -23,16 +23,17 @@ export default function MapSection({
 }: MapSectionProps) {
   const [busPositions, setBusPositions] = useState([]);
   useEffect(() => {
-    (async () => {
+    setInterval(async () => {
       if (selectedTransit) {
         let res = await getAdminLocationWithTransit({
           transit: selectedTransit,
         });
+        console.log(res);
         setBusPositions(res.locations);
       } else {
         setBusPositions([]);
       }
-    })();
+    }, 3000);
   }, []);
   const markers = busPositions.map((point) => {
     return <Marker coordinate={{ latitude: point[0], longitude: point[1] }} />;
