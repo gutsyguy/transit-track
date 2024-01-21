@@ -125,9 +125,7 @@ export async function getTransits(): Promise<Transits> {
 }
 
 interface GetProfile {
-  email: string;
-  name: string;
-  transitCompany: string;
+  token: string;
 }
 
 export async function getProfile(req: GetProfile): Promise<{
